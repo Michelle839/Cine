@@ -15,24 +15,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.ufps.entities.Empleado;
+import co.edu.ufps.entities.Rol;
 import co.edu.ufps.services.EmpleadoService;
+import co.edu.ufps.services.RolService;
 
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadoController {
-	
+
 	@Autowired
 	private EmpleadoService empleadoService;
 
+	@Autowired
+	private RolService rolService;
+
 	@GetMapping
-	public List<Empleado>  list() {
-		
+	public List<Empleado> list() {
 		return empleadoService.list();
 	}
 
+//	@PostMapping
+//	public Empleado create(@RequestBody Empleado Empleado) {
+//		return empleadoService.create(Empleado);
+//	}
+
 	@PostMapping
-	public Empleado create(@RequestBody Empleado Empleado) {
-		return empleadoService.create(Empleado);
+	public ResponseEntity<Empleado> create(@RequestBody Empleado empleadoRequest) {
+		// Buscar el rol por ID
+		Rol rol = rolService.getById(empleadoRequest.getRol().getId())
+				.orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+
+		// Asignar el rol al empleado
+		empleadoRequest.setRol(rol);
+
+		// Crear el empleado
+		Empleado nuevoEmpleado = empleadoService.create(empleadoRequest);
+
+		return ResponseEntity.ok(nuevoEmpleado); // Devolvemos el empleado creado
 	}
 
 	@GetMapping("/{documento}")
@@ -52,7 +71,7 @@ public class EmpleadoController {
 		boolean deleted = empleadoService.delete(id);
 		return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping("/{id}/add_funcions/{funcionId}")
 	public Empleado create(@PathVariable Integer id, @PathVariable Integer funcionId) {
 		Empleado nuevaTipoPersona = empleadoService.addFuncion(id, funcionId);

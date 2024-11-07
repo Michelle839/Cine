@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import co.edu.ufps.entities.Pelicula;
 import co.edu.ufps.entities.Genero;
-import co.edu.ufps.entities.MetodoPago;
 import co.edu.ufps.repositories.PeliculaRepository;
 import co.edu.ufps.repositories.GeneroRepository;
 
@@ -50,7 +49,7 @@ public class GeneroService {
 		Genero genero = optionalgenero.get();
 
 		// Actualiza otros campos según sea necesario
-		genero.setDescripcion(genero.getDescripcion());
+		genero.setDescripcion(generoDetails.getDescripcion());
 
 		return Optional.of(generoRepository.save(genero));
 	}

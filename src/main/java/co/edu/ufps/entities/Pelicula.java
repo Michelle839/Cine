@@ -28,8 +28,8 @@ public class Pelicula {
 	@Column(name="titulo", length=70)
 	private String titulo;
 
-	@Column(name="duracion")
-	private Integer duracion;
+	@Column(name="duracion", length=8)
+	private String duracion;
 	
 	@Column(name="sinopsis", length=500)
 	private String sinopsis;

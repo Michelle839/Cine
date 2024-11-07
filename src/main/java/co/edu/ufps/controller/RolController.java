@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.ufps.entities.Empleado;
 import co.edu.ufps.entities.Rol;
 import co.edu.ufps.services.RolService;
 
@@ -26,10 +27,19 @@ public class RolController {
 
 	@GetMapping
 	public List<Rol>  list() {
-		
 		return rolService.list();
 	}
-
+	
+	@GetMapping("/{id}/empleados")  // Podrías usar una ruta más descriptiva
+	public ResponseEntity<List<Empleado>> listEmpleados(@PathVariable Integer id) {
+	    List<Empleado> empleados = rolService.listEmpleados(id);
+	    if (empleados.isEmpty()) {
+	        return ResponseEntity.notFound().build();  // Retorna un 404 si no hay empleados para ese rol
+	    }
+	    return ResponseEntity.ok(empleados);  // Retorna un 200 con la lista de empleados
+	}
+	
+	
 	@PostMapping
 	public Rol create(@RequestBody Rol Rol) {
 		return rolService.create(Rol);
@@ -40,7 +50,7 @@ public class RolController {
 		Optional<Rol> Rol = rolService.getById(id);
 		return Rol.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
-
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Rol> update(@PathVariable Integer id, @RequestBody Rol RolDetails) {
 		Optional<Rol> updatedRol = rolService.update(id, RolDetails);

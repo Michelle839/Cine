@@ -46,6 +46,12 @@ public class PeliculaController {
 		Optional<Pelicula> updatedPelicula = peliculaService.update(id, PeliculaDetails);
 		return updatedPelicula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
+	
+	@GetMapping("/{titulo}")
+    public ResponseEntity<Pelicula> getByNombre(@PathVariable String titulo) {
+        Optional<Pelicula> pelicula = peliculaService.getByNombre(titulo);
+        return pelicula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {

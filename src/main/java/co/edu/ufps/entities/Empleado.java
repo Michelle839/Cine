@@ -2,6 +2,7 @@ package co.edu.ufps.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +38,7 @@ public class Empleado {
 	@JoinColumn(name="rol_id")
 	private Rol rol;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 			name ="empleado_funcion",

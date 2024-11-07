@@ -5,10 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import co.edu.ufps.entities.Pelicula;
 import co.edu.ufps.entities.Funcion;
-
 import co.edu.ufps.repositories.FuncionRepository;
 import co.edu.ufps.repositories.PeliculaRepository;
 
@@ -29,11 +27,11 @@ public class PeliculaService {
 	public Pelicula create(Pelicula pelicula) {
 		return peliculaRepository.save(pelicula);
 	}
-
-//	// Obtener un pelicula por nombre
-//	public List<Pelicula> getByNombre(String nombre) {
-//		return peliculaRepository.findByNombre(nombre);
-//	}
+	
+	
+	public Optional<Pelicula> getByNombre(String titulo) {
+		return peliculaRepository.findByTitulo(titulo);
+	}
 
 	// Actualizar un pelicula existente
 	public Optional<Pelicula> update(Integer id, Pelicula peliculaDetails) {
@@ -45,12 +43,13 @@ public class PeliculaService {
 		Pelicula pelicula = optionalpelicula.get();
 
 		// Actualiza otros campos según sea necesario
-		pelicula.setTitulo(pelicula.getTitulo());
-		pelicula.setDuracion(pelicula.getDuracion());
-		pelicula.setSinopsis(pelicula.getSinopsis());
+		pelicula.setTitulo(peliculaDetails.getTitulo());
+		pelicula.setDuracion(peliculaDetails.getDuracion());
+		pelicula.setSinopsis(peliculaDetails.getSinopsis());
 
 		return Optional.of(peliculaRepository.save(pelicula));
 	}
+	
 
 	// Eliminar un pelicula por ID
 	public boolean delete(Integer id) {

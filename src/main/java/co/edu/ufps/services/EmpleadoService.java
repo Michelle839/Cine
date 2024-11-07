@@ -44,10 +44,10 @@ public class EmpleadoService {
 		Empleado empleado = optionalempleado.get();
 
 		// Actualiza otros campos según sea necesario
-		empleado.setNombre(empleado.getNombre());
-		empleado.setDocumento(empleado.getDocumento());
-		empleado.setEmail(empleado.getEmail());
-		empleado.setRol(empleado.getRol());
+		empleado.setNombre(empleadoDetails.getNombre());
+		empleado.setDocumento(empleadoDetails.getDocumento());
+		empleado.setEmail(empleadoDetails.getEmail());
+		empleado.setRol(empleadoDetails.getRol());
 
 		return Optional.of(empleadoRepository.save(empleado));
 	}

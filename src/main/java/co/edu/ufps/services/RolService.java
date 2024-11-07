@@ -1,5 +1,6 @@
 package co.edu.ufps.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.ufps.entities.Empleado;
-import co.edu.ufps.entities.Estado;
 import co.edu.ufps.entities.Rol;
 import co.edu.ufps.repositories.EmpleadoRepository;
 import co.edu.ufps.repositories.RolRepository;
@@ -25,6 +25,12 @@ public class RolService {
 	public List<Rol> list() {
 		return rolRepository.findAll();
 	}
+	
+	 public List<Empleado> listEmpleados(Integer id) {
+	        Optional<Rol> rolOpt = rolRepository.findById(id);
+	        return rolOpt.map(Rol::getEmpleados).orElse(Collections.emptyList());
+	    }
+	
 	
 	public Rol create(Rol rol) {
 		return rolRepository.save(rol);
@@ -45,7 +51,7 @@ public class RolService {
 		Rol rol = optionalrol.get();
 
 		// Actualiza otros campos según sea necesario
-		rol.setDescripcion(rol.getDescripcion());
+		rol.setDescripcion(rolDetails.getDescripcion());
 
 		return Optional.of(rolRepository.save(rol));
 	}
@@ -77,4 +83,6 @@ public class RolService {
 		}
 		return null;
 	}
+	
+	
 }
