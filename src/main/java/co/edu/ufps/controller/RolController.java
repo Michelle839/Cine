@@ -21,25 +21,33 @@ import co.edu.ufps.services.RolService;
 @RestController
 @RequestMapping("/rols")
 public class RolController {
-	
+
 	@Autowired
 	private RolService rolService;
 
 	@GetMapping
-	public List<Rol>  list() {
+	public List<Rol> list() {
 		return rolService.list();
 	}
-	
-	@GetMapping("/{id}/empleados")  // Podrías usar una ruta más descriptiva
+
+	@GetMapping("/{id}/empleados") // Podrías usar una ruta más descriptiva
 	public ResponseEntity<List<Empleado>> listEmpleados(@PathVariable Integer id) {
-	    List<Empleado> empleados = rolService.listEmpleados(id);
-	    if (empleados.isEmpty()) {
-	        return ResponseEntity.notFound().build();  // Retorna un 404 si no hay empleados para ese rol
-	    }
-	    return ResponseEntity.ok(empleados);  // Retorna un 200 con la lista de empleados
+		List<Empleado> empleados = rolService.listEmpleados(id);
+		if (empleados.isEmpty()) {
+			return ResponseEntity.notFound().build(); // Retorna un 404 si no hay empleados para ese rol
+		}
+		return ResponseEntity.ok(empleados); // Retorna un 200 con la lista de empleados
 	}
-	
-	
+
+	@GetMapping("/descripcion/{descripcion}/empleados") // importante rutas / entre mas especifica mejor
+	public ResponseEntity<List<Empleado>> listEmpleadosDescripcion(@PathVariable String descripcion) {
+		List<Empleado> empleadosDescripcion = rolService.listEmpleadosDescripcion(descripcion);
+		if (empleadosDescripcion.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(empleadosDescripcion);
+	}
+
 	@PostMapping
 	public Rol create(@RequestBody Rol Rol) {
 		return rolService.create(Rol);
@@ -50,7 +58,7 @@ public class RolController {
 		Optional<Rol> Rol = rolService.getById(id);
 		return Rol.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Rol> update(@PathVariable Integer id, @RequestBody Rol RolDetails) {
 		Optional<Rol> updatedRol = rolService.update(id, RolDetails);
@@ -62,13 +70,19 @@ public class RolController {
 		boolean deleted = rolService.delete(id);
 		return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
 	}
-	
-	@GetMapping("/{descripcion}")
-    public ResponseEntity<Rol> getByDescripcion(@PathVariable String descripcion) {
-        Optional<Rol> rol = rolService.getByDescripcion(descripcion);
-        return rol.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-	
+
+	@DeleteMapping("/descripcion/{descripcion}")
+	public ResponseEntity<Void> deleteByDescripcion(@PathVariable String descripcion) {
+		boolean deleted = rolService.deleteByDescripcion(descripcion);
+		return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+	}
+
+	@GetMapping("/descripcion/{descripcion}")
+	public ResponseEntity<Rol> getByDescripcion(@PathVariable String descripcion) {
+		Optional<Rol> rol = rolService.getByDescripcion(descripcion);
+		return rol.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
 	@PostMapping("/{id}/add_empleados/{empleadoId}")
 	public Rol create(@PathVariable Integer id, @PathVariable Integer empleadoId) {
 		Rol nuevaRol = rolService.addEmpleado(id, empleadoId);

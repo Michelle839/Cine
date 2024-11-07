@@ -24,7 +24,7 @@ public class Rol {
 	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="descripcion", length=100)
+	@Column(name="descripcion", length=100, unique=true)
 	private String descripcion;
 	
 	@OneToMany(mappedBy = "rol", cascade= CascadeType.ALL)

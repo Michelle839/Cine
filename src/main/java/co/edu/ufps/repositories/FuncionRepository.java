@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import co.edu.ufps.entities.Cliente;
 import co.edu.ufps.entities.Funcion;
 
 

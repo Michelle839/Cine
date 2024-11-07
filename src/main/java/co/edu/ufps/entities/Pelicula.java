@@ -42,12 +42,4 @@ public class Pelicula {
 	@JsonIgnore
 	private List<Funcion> funciones;
 	
-	public void addFuncion(Funcion funcion) {
-		this.funciones.add(funcion);
-	}
-
-	public void removeFuncion(Funcion funcion) {
-		this.funciones.remove(funcion);
-	}
-	
 }

@@ -10,4 +10,5 @@ import co.edu.ufps.entities.Rol;
 @Repository
 public interface RolRepository extends JpaRepository<Rol,Integer>{
 	Optional<Rol> findByDescripcion(String descripcion);
+	 void deleteByDescripcion(String descripcion);
 }

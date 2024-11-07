@@ -24,7 +24,7 @@ public class Genero {
 	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="descripcion", length=50)
+	@Column(name="descripcion", length=50,unique=true)
 	private String descripcion;
 	
 	@OneToMany(mappedBy = "genero", cascade= CascadeType.ALL)

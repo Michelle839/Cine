@@ -47,22 +47,28 @@ public class PeliculaController {
 		return updatedPelicula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
 	
+	@PutMapping("/titulo/{titulo}")
+	public ResponseEntity<Pelicula> update(@PathVariable String titulo, @RequestBody Pelicula PeliculaDetails) {
+		Optional<Pelicula> updatedPelicula = peliculaService.update(titulo, PeliculaDetails);
+		return updatedPelicula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+	}
+	
 	@GetMapping("/{titulo}")
     public ResponseEntity<Pelicula> getByNombre(@PathVariable String titulo) {
         Optional<Pelicula> pelicula = peliculaService.getByNombre(titulo);
         return pelicula.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+	
+//	@DeleteMapping("/{titulo}")
+//	public ResponseEntity<Void> delete(@PathVariable String titulo) {
+//		boolean deleted = peliculaService.delete(titulo);
+//		return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+//	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		boolean deleted = peliculaService.delete(id);
 		return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
-	}
-	
-	@PostMapping("/{id}/add_funcions/{funcionId}")
-	public Pelicula create(@PathVariable Integer id, @PathVariable Integer funcionId) {
-		Pelicula nuevaPelicula = peliculaService.addFuncion(id, funcionId);
-		return nuevaPelicula;
 	}
 
 }

@@ -11,7 +11,7 @@ import co.edu.ufps.entities.Empleado;
 import co.edu.ufps.entities.Rol;
 import co.edu.ufps.repositories.EmpleadoRepository;
 import co.edu.ufps.repositories.RolRepository;
-
+import jakarta.transaction.Transactional;
 
 @Service
 public class RolService {
@@ -21,17 +21,20 @@ public class RolService {
 	@Autowired
 	public EmpleadoRepository empleadoRepository;
 
-	
 	public List<Rol> list() {
 		return rolRepository.findAll();
 	}
-	
-	 public List<Empleado> listEmpleados(Integer id) {
-	        Optional<Rol> rolOpt = rolRepository.findById(id);
-	        return rolOpt.map(Rol::getEmpleados).orElse(Collections.emptyList());
-	    }
-	
-	
+
+	public List<Empleado> listEmpleados(Integer id) {
+		Optional<Rol> rolOpt = rolRepository.findById(id);
+		return rolOpt.map(Rol::getEmpleados).orElse(Collections.emptyList());
+	}
+
+	public List<Empleado> listEmpleadosDescripcion(String descripcion) {
+		Optional<Rol> rolOptD = rolRepository.findByDescripcion(descripcion);
+		return rolOptD.map(Rol::getEmpleados).orElse(Collections.emptyList());
+	}
+
 	public Rol create(Rol rol) {
 		return rolRepository.save(rol);
 	}
@@ -65,6 +68,18 @@ public class RolService {
 		rolRepository.deleteById(id);
 		return true;
 	}
+
+	// Eliminar un rol por Descripcion
+	@Transactional
+	public boolean deleteByDescripcion(String descripcion) {
+		Optional<Rol> rolOpt = rolRepository.findByDescripcion(descripcion);
+		if (rolOpt.isPresent()) {
+			rolRepository.deleteByDescripcion(descripcion);
+			return true;
+		}
+		return false;
+	}
+
 	public Optional<Rol> getByDescripcion(String descripcion) {
 		return rolRepository.findByDescripcion(descripcion);
 	}
@@ -83,6 +98,5 @@ public class RolService {
 		}
 		return null;
 	}
-	
-	
+
 }

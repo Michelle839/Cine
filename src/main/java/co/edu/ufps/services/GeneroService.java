@@ -1,16 +1,16 @@
 package co.edu.ufps.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import co.edu.ufps.entities.Pelicula;
 import co.edu.ufps.entities.Genero;
 import co.edu.ufps.repositories.PeliculaRepository;
+import jakarta.transaction.Transactional;
 import co.edu.ufps.repositories.GeneroRepository;
-
 
 @Service
 public class GeneroService {
@@ -20,11 +20,15 @@ public class GeneroService {
 	@Autowired
 	public PeliculaRepository peliculaRepository;
 
-	
 	public List<Genero> list() {
 		return generoRepository.findAll();
 	}
-	
+
+	public List<Pelicula> listPeliculas(String descripcion) {
+		Optional<Genero> rolOpt = generoRepository.findByDescripcion(descripcion);
+		return rolOpt.map(Genero::getPeliculas).orElse(Collections.emptyList());
+	}
+
 	public Genero create(Genero genero) {
 		return generoRepository.save(genero);
 	}
@@ -33,11 +37,10 @@ public class GeneroService {
 	public Optional<Genero> getById(Integer id) {
 		return generoRepository.findById(id);
 	}
-	
-//	public Optional<Genero>getByDescripcion(String descripcion) {
-//		return generoRepository.findByDescripcion(descripcion);
-//	}
 
+	public Optional<Genero>getByDescripcion(String descripcion) {
+		return generoRepository.findByDescripcion(descripcion);
+	}
 
 	// Actualizar un genero existente
 	public Optional<Genero> update(Integer id, Genero generoDetails) {
@@ -63,7 +66,18 @@ public class GeneroService {
 		generoRepository.deleteById(id);
 		return true;
 	}
-	
+
+	// Eliminar un genero por Descripcion
+	@Transactional
+	public boolean deleteByDescripcion(String descripcion) {
+		Optional<Genero> generoOpt = generoRepository.findByDescripcion(descripcion);
+		if (generoOpt.isPresent()) {
+			generoRepository.deleteByDescripcion(descripcion);
+			return true;
+		}
+		return false;
+	}
+
 	public Genero addPelicula(Integer id, Integer peliculaId) {
 
 		Optional<Genero> generoOpt = generoRepository.findById(id);
