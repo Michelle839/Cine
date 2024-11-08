@@ -53,7 +53,7 @@
 //		// Actualiza otros campos según sea necesario
 //		snack.setNombre(snack.getNombre());
 //		snack.setPrecio(snack.getPrecio());
-//		snack.setCantidadDisponible(snack.getCantidadDisponible());
+//		snack.setCantidadDisponible(snackDetails.getCantidadDisponible());
 //
 //		return Optional.of(snackRepository.save(snack));
 //	}

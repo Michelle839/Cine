@@ -49,7 +49,7 @@
 //		Estado estado = optionalestado.get();
 //
 //		// Actualiza otros campos según sea necesario
-//		estado.setDescripcion(estado.getDescripcion());
+//		estado.setDescripcion(estadoDetails.getDescripcion());
 //
 //		return Optional.of(estadoRepository.save(estado));
 //	}

@@ -43,9 +43,9 @@
 //		Promocion promocion = optionalpromocion.get();
 //
 //		// Actualiza otros campos según sea necesario
-//		promocion.setDescripcion(promocion.getDescripcion());
-//		promocion.setFechaInicio(promocion.getFechaInicio());
-//		promocion.setFechaFin(promocion.getFechaFin());
+//		promocion.setDescripcion(promocionDetails.getDescripcion());
+//		promocion.setFechaInicio(promocionDetails.getFechaInicio());
+//		promocion.setFechaFin(promocionDetails.getFechaFin());
 //
 //		return Optional.of(promocionRepository.save(promocion));
 //	}

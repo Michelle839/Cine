@@ -39,8 +39,8 @@
 //		Pedido pedido = optionalpedido.get();
 //
 //		// Actualiza otros campos según sea necesario
-//		pedido.setFecha(pedido.getFecha());
-//		pedido.setTotal(pedido.getTotal());
+//		pedido.setFecha(pedidoDetails.getFecha());
+//		pedido.setTotal(pedidoDetails.getTotal());
 //
 //		return Optional.of(pedidoRepository.save(pedido));
 //	}

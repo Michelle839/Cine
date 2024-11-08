@@ -1,7 +1,6 @@
 package co.edu.ufps.repositories;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,11 +10,12 @@ import co.edu.ufps.entities.Funcion;
 
 @Repository
 public interface FuncionRepository extends JpaRepository<Funcion,Integer>{
+	List<Funcion> findByFecha(LocalDate fecha);
 
 //	// Encontrar funciones por fecha
-//    List<Funcion> findByFecha(Date fecha);
+//    List<Funcion> findByFecha(LocalDate fecha);
 //
 //    // Encontrar funciones por horario
-//    List<Funcion> findByHorario(Time horario);
+//    List<Funcion> findByHorario(LocalTime horario);
     
 }

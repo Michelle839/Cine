@@ -39,7 +39,7 @@
 //		SnackPromocion snackPromocion = optionalsnackPromocion.get();
 //
 //		// Actualiza otros campos según sea necesario
-//		snackPromocion.setDescuento(snackPromocion.getDescuento());
+//		snackPromocion.setDescuento(snackPromocionDetails.getDescuento());
 //		
 //		return Optional.of(snackPromocionRepository.save(snackPromocion));
 //	}

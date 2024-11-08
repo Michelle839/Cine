@@ -1,13 +1,10 @@
 package co.edu.ufps.entities;
 
-
-
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,35 +19,34 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="funcion")
+@Table(name = "funcion")
 @Data
 public class Funcion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
+	
+	private String horario;
 
-	@Column(name="horario")
-	private Time horario;
-	
 	@Column(name="fecha")
-	private Date fecha;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate fecha;
 	
 	@ManyToOne
-	@JoinColumn(name="pelicula_id")
+	@JoinColumn(name = "pelicula_id")
 	private Pelicula pelicula;
-	
+
 	@ManyToOne
-	@JoinColumn(name="sala_id")
+	@JoinColumn(name = "sala_id")
 	private Sala sala;
-	
+
 	@ManyToMany(mappedBy = "funciones")
 	@JsonIgnore
 	private List<Empleado> empleados;
-	
-	@OneToMany(mappedBy = "funcion", cascade= CascadeType.ALL)
+
+	@OneToMany(mappedBy = "funcion", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Boleto> boletos;
-	
-	
+
 }

@@ -44,13 +44,6 @@
 //        return pedidoSnackPromocionRepository.findById(id);
 //    }
 //
-//    /**
-//     * Actualiza un PedidoSnackPromocion existente con los detalles proporcionados.
-//     * 
-//     * @param id                   ID del PedidoSnackPromocion a actualizar.
-//     * @param pedidoSnackPromocion Detalles actualizados del PedidoSnackPromocion.
-//     * @return El PedidoSnackPromocion actualizado, si está presente.
-//     */
 //    public Optional<PedidoSnackPromocion> update(Integer id, PedidoSnackPromocion pedidoSnackPromocionDetails) {
 //        Optional<PedidoSnackPromocion> optionalPedidoSnackPromocion = pedidoSnackPromocionRepository.findById(id);
 //        if (!optionalPedidoSnackPromocion.isPresent()) {

@@ -49,13 +49,7 @@
 //        return categoriaBoletoRepository.findById(id);
 //    }
 //
-//    /**
-//     * Actualiza una categoría de boleto existente con los detalles proporcionados.
-//     * 
-//     * @param id                  ID de la categoría de boleto a actualizar.
-//     * @param categoriaBoletoDetails Detalles actualizados de la categoría de boleto.
-//     * @return La categoría de boleto actualizada, si está presente.
-//     */
+
 //    public Optional<CategoriaBoleto> update(Integer id, CategoriaBoleto categoriaBoletoDetails) {
 //        Optional<CategoriaBoleto> optionalCategoriaBoleto = categoriaBoletoRepository.findById(id);
 //        if (!optionalCategoriaBoleto.isPresent()) {
@@ -69,12 +63,6 @@
 //        return Optional.of(categoriaBoletoRepository.save(categoriaBoleto));
 //    }
 //
-//    /**
-//     * Elimina una categoría de boleto por su ID.
-//     * 
-//     * @param id ID de la categoría de boleto a eliminar.
-//     * @return true si la categoría de boleto fue eliminada, false si no existe.
-//     */
 //    public boolean delete(Integer id) {
 //        if (!categoriaBoletoRepository.existsById(id)) {
 //            return false;
@@ -83,12 +71,7 @@
 //        return true;
 //    }
 //
-//    /**
-//     * Obtiene todos los boletos de una categoría específica.
-//     * 
-//     * @param categoriaId ID de la categoría de boleto.
-//     * @return Lista de boletos en la categoría especificada.
-//     */
+
 //    public List<Boleto> getBoletosByCategoria(Integer categoriaId) {
 //        Optional<CategoriaBoleto> categoriaBoletoOpt = categoriaBoletoRepository.findById(categoriaId);
 //        if (categoriaBoletoOpt.isPresent()) {
@@ -97,13 +80,6 @@
 //        return List.of(); // Retorna una lista vacía si no se encuentra la categoría
 //    }
 //
-//    /**
-//     * Agrega un boleto a una categoría de boleto.
-//     * 
-//     * @param categoriaId ID de la categoría de boleto.
-//     * @param boleto El boleto a agregar.
-//     * @return La categoría de boleto actualizada con el nuevo boleto.
-//     */
 //    public Optional<CategoriaBoleto> addBoletoToCategoria(Integer categoriaId, Boleto boleto) {
 //        Optional<CategoriaBoleto> categoriaBoletoOpt = categoriaBoletoRepository.findById(categoriaId);
 //        if (categoriaBoletoOpt.isPresent()) {

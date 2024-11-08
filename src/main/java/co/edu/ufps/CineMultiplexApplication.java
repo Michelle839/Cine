@@ -9,5 +9,7 @@ public class CineMultiplexApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CineMultiplexApplication.class, args);
 	}
+	
+	
 
 }

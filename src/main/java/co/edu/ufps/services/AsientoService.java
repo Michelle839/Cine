@@ -85,13 +85,6 @@
 //        return true;
 //    }
 //
-//    /**
-//     * Asocia un boleto a un asiento.
-//     * 
-//     * @param id        ID del asiento.
-//     * @param boletoId  ID del boleto a asociar.
-//     * @return El asiento actualizado con el boleto asociado.
-//     */
 ////    public Asiento addBoleto(Integer id, Integer boletoId) {
 ////        Optional<Asiento> asientoOpt = asientoRepository.findById(id);
 ////        if (asientoOpt.isPresent()) {
@@ -103,46 +96,21 @@
 ////        return null;
 ////    }
 //
-//    /**
-//     * Busca todos los asientos de una sala específica.
-//     * 
-//     * @param salaId ID de la sala.
-//     * @return Lista de asientos en la sala.
-//     */
 ////    public List<Asiento> findBySala(Integer salaId) {
 ////        return asientoRepository.findBySalaId(salaId);
 ////    }
 //
-//    /**
-//     * Actualiza el estado de múltiples asientos al mismo tiempo.
-//     * 
-//     * @param ids         Lista de IDs de asientos a actualizar.
-//     * @param nuevoEstado Nuevo estado a aplicar.
-//     * @return Lista de asientos actualizados.
-//     */
 //    public List<Asiento> updateEstadoMultiple(List<Integer> ids, String nuevoEstado) {
 //        List<Asiento> asientos = asientoRepository.findAllById(ids);
 //        asientos.forEach(asiento -> asiento.getEstado().setDescripcion(nuevoEstado));
 //        return asientoRepository.saveAll(asientos);
 //    }
 //
-//    /**
-//     * Verifica si un asiento está disponible.
-//     * 
-//     * @param id ID del asiento a verificar.
-//     * @return true si el asiento está disponible, false si está ocupado o reservado.
-//     */
 //    public boolean isAvailable(Integer id) {
 //        Optional<Asiento> asiento = asientoRepository.findById(id);
 //        return asiento.isPresent() && "Disponible".equalsIgnoreCase(asiento.get().getEstado().getDescripcion());
 //    }
 //
-//    /**
-//     * Libera un asiento específico, cambiando su estado a "Disponible".
-//     * 
-//     * @param id ID del asiento a liberar.
-//     * @return El asiento liberado, si está presente.
-//     */
 //    public Optional<Asiento> releaseAsiento(Integer id) {
 //        Optional<Asiento> asientoOpt = asientoRepository.findById(id);
 //        if (asientoOpt.isPresent()) {

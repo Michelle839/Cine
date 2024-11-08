@@ -1,6 +1,7 @@
 package co.edu.ufps.controller;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,21 @@ public class FuncionController {
 		Optional<Funcion> Funcion = funcionService.getById(id);
 		return Funcion.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
+	
+	@GetMapping("/fecha/{fecha}")
+	public ResponseEntity<List<Funcion>>getByGrupo(@PathVariable LocalDate fecha) {
+		List<Funcion> selecciones = funcionService.listFuncionesPorFecha(fecha);
+		if (selecciones.isEmpty()) {
+			return ResponseEntity.notFound().build(); // Retorna un 404 si no hay resultados para ese rol
+		}
+		return ResponseEntity.ok(selecciones); // Retorna un 200 con la lista de resultados
+	}
+	
+	@PutMapping("/{funcionId}/pelicula/{peliculaId}")
+    public Funcion agregarPeliculaAFuncion(@PathVariable Integer funcionId, @PathVariable Integer peliculaId) {
+        return funcionService.agregarPeliculaAFuncion(funcionId, peliculaId);
+    }
+
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Funcion> update(@PathVariable Integer id, @RequestBody Funcion FuncionDetails) {
@@ -55,18 +71,5 @@ public class FuncionController {
 		boolean deleted = funcionService.delete(id);
 		return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
 	}
-	
-//	 // Obtener funciones por fecha
-//    @GetMapping("/{fecha}")
-//    public List<Funcion> getByFecha(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
-//        return funcionService.findByFecha(fecha);
-//    }
-//    
-//
-//    // Obtener funciones por horario
-//    @GetMapping("/{horario}")
-//    public List<Funcion> getByHorario(@PathVariable Time horario) {
-//        return funcionService.findByHorario(horario);
-//    }
 
 }
